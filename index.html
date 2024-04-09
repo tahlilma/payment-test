@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Give Us Money</title>
+</head>
+<body>
+  <input type="number" placeholder="Amount">
+  <button>Submit</button>
+  <script>
+    let button = document.querySelector('button');
+    button.onclick = () => {
+      const amount = document.querySelector('input').value
+      console.log(amount)
+      window.location = `http://localhost:3000/payment/pay/${amount}`
+    }
+  </script>
+</body>
+</html>
