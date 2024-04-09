@@ -2,16 +2,17 @@ const express = require("express");
 const SSLCommerzPayment = require("sslcommerz-lts");
 const { nanoid } = require("nanoid");
 const path = require("path");
-const cors = require('cors');
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 app.use(cors({ origin: true, credentials: true }));
 
 const PORT = 3000;
 
-const store_id = "tests660e87c1b29f4";
-const store_passwd = "tests660e87c1b29f4@ssl";
-const is_live = false; //true for live, false for sandbox
+const store_id = process.env.STORE_ID;
+const store_passwd = process.env.STORE_PASSWD;
+const is_live = false; 
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("./index.html"));
@@ -21,7 +22,7 @@ app.get("/payment/pay/:amount", (req, res) => {
   const data = {
     total_amount: req.params.amount,
     currency: "BDT",
-    tran_id: nanoid(12), // use unique tran_id for each api call
+    tran_id: nanoid(12),
     success_url: `http://localhost:${PORT}/payment/success`,
     fail_url: `http://localhost:${PORT}/payment/fail`,
     cancel_url: `http://localhost:${PORT}/payment/cancel`,
@@ -40,7 +41,7 @@ app.get("/payment/pay/:amount", (req, res) => {
     cus_country: "Bangladesh",
     cus_phone: "01711111111",
     cus_fax: "01711111111",
-    ship_name: "Nigga",
+    ship_name: "Real",
     ship_add1: "Dhaka",
     ship_add2: "Dhaka",
     ship_city: "Dhaka",
